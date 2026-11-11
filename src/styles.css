@@ -1,0 +1,369 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "IBM Plex Sans";
+  src: url("/fonts/IBMPlexSans-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IBM Plex Sans";
+  src: url("/fonts/IBMPlexSans-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IBM Plex Sans";
+  src: url("/fonts/IBMPlexSans-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("/fonts/IBMPlexMono-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-elevated: var(--elevated);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-subtle: var(--subtle);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-border: var(--border);
+  --color-warn: var(--warn);
+  --color-success: var(--success);
+  --color-danger: var(--danger);
+}
+
+:root {
+  --bg: #f3f1eb;
+  --surface: #faf8f3;
+  --elevated: #ffffff;
+  --fg: #16171c;
+  --muted: #6d6a63;
+  --subtle: #9a968c;
+  --accent: #2c3640;
+  --accent-fg: #f3f1eb;
+  --border: color-mix(in oklab, var(--fg) 12%, transparent);
+  --warn: #a15c32;
+  --success: #2f6d4f;
+  --danger: #9f3e38;
+  --shadow-border: 0 0 0 1px rgba(22, 23, 28, 0.08),
+    0 1px 2px -1px rgba(22, 23, 28, 0.06);
+  --shadow-border-hover: 0 0 0 1px rgba(22, 23, 28, 0.14),
+    0 1px 2px -1px rgba(22, 23, 28, 0.08);
+  --grid-line: rgba(22, 23, 28, 0.055);
+  --motion-micro: 80ms;
+  --motion-quick: 150ms;
+  --motion-fast: 250ms;
+  --motion-medium: 320ms;
+  --motion-slow: 400ms;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-smooth-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html.dark {
+  --bg: #0b0c0e;
+  --surface: #12141a;
+  --elevated: #191c23;
+  --fg: #e8e6e1;
+  --muted: #8c8a84;
+  --subtle: #6a6862;
+  --accent: #c5ced6;
+  --accent-fg: #0b0c0e;
+  --border: color-mix(in oklab, var(--fg) 12%, transparent);
+  --warn: #c47c4a;
+  --success: #6a9e7c;
+  --danger: #c45c4a;
+  --shadow-border: 0 0 0 1px rgba(255, 255, 255, 0.08);
+  --shadow-border-hover: 0 0 0 1px rgba(255, 255, 255, 0.14);
+  --grid-line: rgba(232, 230, 225, 0.045);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html,
+  body,
+  #app {
+    min-height: 100dvh;
+    background-color: var(--bg);
+    color: var(--fg);
+  }
+
+  body {
+    font-family: var(--font-sans);
+    line-height: 1.5;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  * {
+    border-color: var(--border);
+  }
+}
+
+.blueprint-grid {
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.pressable {
+  transition-property: scale, opacity, background-color, color, box-shadow;
+  transition-duration: var(--motion-quick);
+  transition-timing-function: var(--ease-out);
+}
+
+.pressable:active:not(:disabled) {
+  scale: 0.96;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.pane-pill {
+  width: calc(50% - 1rem);
+  transition: transform var(--motion-fast) var(--ease-smooth-out);
+  transform: translateX(0);
+}
+
+.pane-pill[data-pane="contract"] {
+  transform: translateX(calc(100% + 1rem));
+}
+
+.pane-slide {
+  transition-property: transform;
+  transition-duration: var(--motion-medium);
+  transition-timing-function: var(--ease-smooth-out);
+}
+
+.weight-seg {
+  min-width: 0;
+  transition: width var(--motion-fast) var(--ease-smooth-out);
+}
+
+.icon-swap {
+  display: grid;
+  place-items: center;
+  transition-property: opacity, scale;
+  transition-duration: var(--motion-fast);
+  transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+
+.icon-swap[data-show="true"] {
+  opacity: 1;
+  scale: 1;
+}
+
+.icon-swap[data-show="false"] {
+  opacity: 0;
+  scale: 0.25;
+  pointer-events: none;
+}
+
+.dialog-overlay[data-state="open"] {
+  animation: fade-in var(--motion-fast) var(--ease-out) both;
+}
+
+.dialog-overlay[data-state="closed"] {
+  animation: fade-out var(--motion-quick) var(--ease-out) both;
+}
+
+.dialog-panel {
+  transform: translate(-50%, -50%);
+  overscroll-behavior: contain;
+}
+
+.dialog-panel[data-state="open"] {
+  animation: dialog-in var(--motion-fast) var(--ease-smooth-out) both;
+}
+
+.dialog-panel[data-state="closed"] {
+  animation: dialog-out var(--motion-quick) var(--ease-out) both;
+}
+
+.tip-motion[data-state="delayed-open"],
+.tip-motion[data-state="instant-open"] {
+  animation: tip-in var(--motion-quick) var(--ease-out) both;
+}
+
+.tip-motion[data-state="closed"] {
+  animation: tip-out var(--motion-micro) var(--ease-out) both;
+}
+
+.check-pop[data-state="checked"] {
+  animation: icon-in var(--motion-fast) cubic-bezier(0.2, 0, 0, 1) both;
+}
+
+.check-pop[data-state="unchecked"] {
+  animation: icon-out var(--motion-quick) cubic-bezier(0.2, 0, 0, 1) both;
+}
+
+.notice-in {
+  animation: fade-rise var(--motion-fast) var(--ease-smooth-out) both;
+}
+
+.stagger-in > * {
+  animation: fade-rise var(--motion-slow) var(--ease-smooth-out) both;
+}
+
+.stagger-in > *:nth-child(2) {
+  animation-delay: 40ms;
+}
+
+.stagger-in > *:nth-child(3) {
+  animation-delay: 80ms;
+}
+
+.stagger-in > *:nth-child(4) {
+  animation-delay: 120ms;
+}
+
+.stagger-in > *:nth-child(5) {
+  animation-delay: 160ms;
+}
+
+.stagger-in > *:nth-child(6) {
+  animation-delay: 200ms;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, calc(-50% + 8px)) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes dialog-out {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, calc(-50% - 6px)) scale(0.98);
+  }
+}
+
+@keyframes tip-in {
+  from {
+    opacity: 0;
+    scale: 0.98;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+@keyframes tip-out {
+  from {
+    opacity: 1;
+    scale: 1;
+  }
+  to {
+    opacity: 0;
+    scale: 0.99;
+  }
+}
+
+@keyframes icon-in {
+  from {
+    opacity: 0;
+    scale: 0.25;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+@keyframes icon-out {
+  to {
+    opacity: 0;
+    scale: 0.25;
+  }
+}
+
+@keyframes fade-rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

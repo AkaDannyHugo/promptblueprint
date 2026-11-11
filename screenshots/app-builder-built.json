@@ -1,0 +1,38 @@
+{
+  "url": "http://127.0.0.1:8081/",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "Prompt Blueprint",
+      "hasCanvas": false,
+      "bodyTextLen": 7418,
+      "bodyTextHash": "e83a494b5e449696974962eb4ad7e4abcfee984a101d14f718f1792bb2df17d1",
+      "bodyTextPrefix": "Prompt Blueprint Aggressive · spot · Grok Bot Grok Bot Grok Spot",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-built.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "Prompt Blueprint",
+      "hasCanvas": false,
+      "bodyTextLen": 7437,
+      "bodyTextHash": "3fab965b14fc7847777ff8d077df8960d186a2836a692da3ba72e5dc1da40941",
+      "bodyTextPrefix": "Prompt Blueprint Aggressive · spot · Grok Bot Grok Bot Grok Spot",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-built-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/app-builder-built.json",
+  "divergesFromBaseline": false,
+  "baselineReasons": []
+}
